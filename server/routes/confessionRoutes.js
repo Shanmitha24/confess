@@ -34,11 +34,12 @@ router.get("/", async (req, res) => {
   const confessions = await Confession.find().sort({ createdAt: -1 });
   res.json(confessions);
 });
+
+// DELETE
 router.delete("/delete/:id", async (req, res) => {
   await Confession.findByIdAndDelete(req.params.id);
   res.json({ message: "Deleted" });
 });
-
 
 // LIKE
 router.put("/:id/like", async (req, res) => {
@@ -47,6 +48,7 @@ router.put("/:id/like", async (req, res) => {
   await confession.save();
   res.json(confession);
 });
+
 // REPORT
 router.put("/:id/report", async (req, res) => {
   const confession = await Confession.findById(req.params.id);
